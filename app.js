@@ -59,7 +59,6 @@ card.addEventListener('mousemove', runEvent);
 
 function runEvent(e){
 
-   
     document.body.style.background = `rgb(${e.offsetX}, ${e.offsetY}, 40)`;
     card.style.background = `rgb(${e.offsetY}, ${e.offsetX}, 60)`;
     liOdd.forEach(function(li, index){
@@ -71,17 +70,49 @@ function runEvent(e){
     })
 }
 
-const form = document.querySelector('form');
-const taskInput = document.getElementById('task');
-taskInput.value = '';
+// const form = document.querySelector('form');
+// const taskInput = document.getElementById('task');
+// taskInput.value = '';
 
 
-taskInput.addEventListener('keydown', runEvent2);
-function runEvent2(e){
-    console.log(`Event Type: ${e.type}`);
-    console.log(taskInput.value);
+// taskInput.addEventListener('keydown', runEvent2);
+// function runEvent2(e){
+//     console.log(`Event Type: ${e.type}`);
+//     console.log(taskInput.value);
 
-    heading.innerText =  e.target.value;
+//     heading.innerText =  e.target.value;
+
+//     e.preventDefault();
+// }
+
+
+// document.body.addEventListener('click', deleteItem);
+
+// function deleteItem(e){
+//     if(e.target.parentElement.classList.contains('delete-item')){
+    
+//         e.target.parentElement.parentElement.remove();
+
+//     }
+// }
+
+
+
+document.querySelector('form').addEventListener('submit', function(e){
+
+    const task = document.getElementById('task').value;
+    let tasks;
+
+    if(localStorage.getItem('tasks') === null){
+        tasks = [];
+    }else{
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.push(task);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    alert('Task Saved');
 
     e.preventDefault();
-}
+});
