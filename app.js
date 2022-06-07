@@ -1,7 +1,7 @@
 
 const form = document.querySelector('#task-form');
 const taskList = document.querySelector('.collection');
-const clearBtn = document.querySelector('.clear-tasks');
+const clearBtn = document.querySelector('.clear-task');
 const filter = document.querySelector('#filter');
 const taskInput = document.querySelector('#task');
 
@@ -14,6 +14,10 @@ function loadEventListeners(){
     form.addEventListener('submit', addTask);
     //Remove task event
     taskList.addEventListener('click', removeTask);
+    // Clear task event
+    clearBtn.addEventListener('click', clearTasks);
+    //Filter tasks event
+    filter.addEventListener('keyup', filterTasks);
 }
 
 // Add Task
@@ -49,7 +53,7 @@ function addTask(e){
 
     e.preventDefault();
 }
-
+//Remove Task
 function removeTask(e){
 
     if(e.target.parentElement.classList.contains('delete-item')){
@@ -57,4 +61,19 @@ function removeTask(e){
             e.target.parentElement.parentElement.remove();
         }
     }
+}
+
+//Cleat Task
+function clearTasks(){
+    taskList.innerHTML = '';
+
+}
+
+//Filter Tasks
+function filterTasks(e){
+    const text = e.target.value.toLowerCase();
+    document.querySelectorAll('.collection-item').forEach(function(task){
+        const item = task.firstChild.textContent;
+    });
+    
 }
